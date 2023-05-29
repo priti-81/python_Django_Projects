@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>updatedata</title>
+</head>
+<body style="background-color: silver;">
+    <h1>hii this is home page {{name}}</h1><hr><hr>
+    <a href="/Business" target="_blank">Business </a>
+    <a href="/Resources"target="_blank">Resources</a>
+    <a href="/showdata" target="_blank">showdata</a>
+    <br><br>
+    <form method="post" >
+         {% csrf_token %}
+        <table>
+            
+            <tr><td><label for="name">Name</label></td>
+        <td><input type="text" size="25" name="name" value="{{cid.name}}"/><br><br></td></tr>
+    
+
+       <tr> <td><label for="city">City</label></td>
+        <td><input type="text"  size="25" name="city" value="{{cid.city}}"/><br><br></td></tr>
+
+        <tr><td><label for="email">Email</label></td>
+        <td><input type="email"  size="25" name="email" value="{{cid.email}}"/><br><br></td></tr>
+
+        <tr><td><label for="dob">Date of Birth</label></td>
+        <td><input type="date"  size="25" name="dob" value="{{cid.dob|date:'Y-m-d'}}"/><br><br></td></tr>
+
+        <tr><td><label for="mobile">Mobile</label></td>
+        <td><input type="number"  size="25" name="mobile" value="{{cid.mobile}}"/><br><br></td></tr>
+
+        <tr><td><label for="address">Address</label><br><br></td>
+        <td><textarea name="address" placeholder="Address is mendotary"></textarea></td></tr>
+
+        <tr><td><input type="submit" value="update"/></td>
+       <td> <input type="reset" value="reset"/></td></tr>
+    
+    
+    </table>
+</form>
+
+        
+
+        
+   
+
+
+    
+</body>
+</html>
