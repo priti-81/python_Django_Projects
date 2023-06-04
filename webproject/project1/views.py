@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import userform
 from .models import signupinfo
 from django.contrib import messages
+from django.contrib.auth import logout
 
 
 # Create your views here.
@@ -39,7 +40,20 @@ def signup(request):
         return render (request,'signup.html')
 
 def mypage(request):
-    return render (request,'mypage.html')
+    data=request.session.get('user')
+    return render (request,'mypage.html',{'data':data})
+
+def forgotpassword(request):
+    return render(request,'forgotpassword.html')
+
+def password(request):
+    return render(request,'password.html')
+
+   
+def userlogout(request):
+    logout(request)
+    return redirect('/')
+
 
 
 
