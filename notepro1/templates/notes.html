@@ -41,6 +41,31 @@
     width: 170px;
 }
 
+body{
+    font-weight: 600;
+    background-image: url(https://coolbackgrounds.io/images/backgrounds/white/white-triangle-369b8d2d.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+
+}
+
+
+.container{
+    margin-top: 5px;
+    border: 2px solid darkcyan;
+    border-radius: 5px;
+    padding: 20px;
+   
+}
+h4{
+    text-align: center;
+    margin-top: 1%;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:darkcyan;
+}
+
     </style>
 </head>
 <body>
@@ -67,17 +92,47 @@
 
 <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Dropdown button
+      {{user}}
     </button>
 
       <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item " href="#" >Update profile</a></li>
+          <li><a class="dropdown-item " href="/update" >Update profile</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item " href="#">Logout</a></li>
         </ul>
-  </div>
-            
+    </div>         
     </nav>
+    <h4>Hey {{uname}}, Submit your Notes...</h4>
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" class="form-control" name="Title" id="exampleFormControlInput1" placeholder="ex. nameerror">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Technology</label>
+            <input type="text" class="form-control" name="Technology" id="exampleFormControlInput1" placeholder="ex. python">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Explaination</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="Explaination"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="formFile" class="form-label">Uploadfile</label>
+            <input class="form-control" name="Files" type="file" id="formFile">
+          </div>
+
+          <div class="row my-4 ">
+            <div class="col-md-8 ">
+              <button type="submit" class="btn btn-warning">Submit</button> 
+          </div>
+        </div>
+    </form>    
+    </div>
 </body>
 </html>
 
