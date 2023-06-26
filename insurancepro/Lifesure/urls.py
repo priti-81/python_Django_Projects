@@ -8,4 +8,5 @@ urlpatterns = [
     path('login/',views.login,name='login'),
     path('policy/',views.policy, name='policy'),
     path('logout/',views.userlogout),
+    path('delete/<int:id>',views.deletedata),
 ]

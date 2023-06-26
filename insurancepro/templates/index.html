@@ -28,6 +28,8 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="/static/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 
+    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -480,7 +482,7 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3>{{cuser}}</h3>
                   <p>Total Policyholders</p>
                 </div>
                 <div class="icon">
@@ -493,7 +495,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+                  <h3>{{tpolicy}}</h3>
                   <p>Total Policies</p>
                 </div>
                 <div class="icon">
@@ -506,7 +508,7 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3>{{fund1}}</h3>
                   <p>Total Policyholders Fund</p>
                 </div>
                 <div class="icon">
@@ -546,6 +548,7 @@
       <tr>
         <td>{{i.id}}</td>
         <td>{{i.policynames}}</td>
+        <td><a  href="/delete/{{i.id}}" class="fa fa-trash"  style="font-size: 2rem; color: rgb(165, 42, 42);"> </a></td>
      </tr>
     {% endfor %}
 

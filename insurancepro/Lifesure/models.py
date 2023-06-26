@@ -25,7 +25,7 @@ class policyTable(models.Model):
     Name=models.CharField(max_length=30)
     policyName=models.ForeignKey(Addpolicy,null=True,default=None,on_delete=models.CASCADE)
     policyTenure=models.SmallIntegerField(default=None)
-    totalAmount=models.BigIntegerField(default=None)
+    totalAmount=models.IntegerField(default=123456)
     premiumAmount=models.BigIntegerField(default=None)
     premiumPay=models.TextField(default=None)
     expectedReturn=models.BigIntegerField(default=None)
