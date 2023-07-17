@@ -9,7 +9,7 @@ class  noteSignup(models.Model):
     password=models.CharField(max_length=20)
 
     def __str__(self):
-        return (f'{self.name},{self.email},{self.mobile},{self.city},{self.password}')
+        return (f'{self.name},{self.email}')
 
 class myModel(models.Model):
     Title=models.CharField(max_length=100)

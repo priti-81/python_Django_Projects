@@ -1,16 +1,232 @@
-{% extends 'index.html' %}    
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %} contactus {% endblock title %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>contactus</title>
+  
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/static/images/Notepad.ico.ico" />
+
+  <script src="/static/js/body.js" ></script>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="/static/contact/css/bootstrap.css" />
+  <!-- fonts awesome style -->
+  <link href="/static/contact/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="/static/contact/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="/static/contact/css/responsive.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+  <!-- whatsapp button -->
+  <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+        <script>
+          var wa_btnSetting = {"btnColor":"#16BE45","ctaText":"chat with us","cornerRadius":40,"marginBottom":20,"marginLeft":20,"marginRight":20,"btnPosition":"right","whatsAppNumber":"918128970461","welcomeMessage":"Hi user, How can i help u?","zIndex":999999,"btnColorScheme":"light"};
+          window.onload = () => {
+            _waEmbed(wa_btnSetting);
+          };
+        </script>
+  
+</head>
+
+<body >
+
+  <nav class="navbar navbar-expand-lg navbar back-ground">
+    <div class="container-fluid">
+        <a  class="navbar-brand">
+            <img src="/static/images/notebook.png" style="width: 40px;" alt="CoolBrand"  >Mynote
+        </a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav lead test">
+
+              <a href="/" class="nav-item nav-link active mx-3">Home</a> 
+              {% if  request.user.is_authenticated or   username is not none %}
+                  <a href= "/profile"  role="button" class="nav-item nav-link active mx-3">Profile</a> 
+                  <a href="/notes"   role="button" class="nav-item nav-link active mx-3" >Notes</a> 
+              
+              {% else %}  
+              
+                  <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Profile</a>
+                  <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Notes</a> 
+                  
+              {% endif %}
+              <a href="/aboutus" class="nav-item nav-link active mx-3">About Us</a>
+              <a href="" class="nav-item nav-link active mx-3">Contact Us</a>
         
+             
+ 
+</div>
+<form class="form-inline ms-auto" >    
+  <input type="search" placeholder="Search" class="form-control  border border-primary">
+</form>
 
-{% block href %}  <a href="/" class="nav-item nav-link active mx-3">Home</a> {% endblock href %}
-{% block href1 %}  <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Notes</a>  {% endblock href1 %}
-{% block href2 %}  <a href="/aboutus" class="nav-item nav-link active mx-3">About Us</a> {% endblock href2 %}
-{% block href3 %}  <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Profile</a> {% endblock href3 %}
-{% block href4 %}  <a href="" class="nav-item nav-link active mx-3">Contact Us</a> {% endblock href4 %}
-                
+</nav>
 
-{% block a1 %}   {% endblock a1 %}
-{% block a2 %}   {% endblock a2 %}
 
-                    
+
+
+  <!-- contact section -->
+
+  <section class="contact_section my-5 ">
+    <div class="container-fluid ">
+      <div class="row justify-content-center">
+        <div class="col-md-5 ">
+          <div class="form_container">
+            <div class="heading_container">
+              <h2>
+                Contact Us For More Info
+              </h2>
+            </div>
+            <form action="#">
+              <div>
+                <input type="text" placeholder="Full Name " />
+              </div>
+              <div>
+                <input type="email" placeholder="Email" />
+              </div>
+              <div>
+                <input type="text" placeholder="Phone number" />
+              </div>
+              <div>
+                <input type="text" class="message-box" placeholder="Message" />
+              </div>
+              <div class="d-flex ">
+                <button>
+                  SEND
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-5  mx-2">
+          <div class="map_container">
+            <div class="map">
+              <div id="googleMap">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d646.1110161807163!2d70.82250010970269!3d22.321235048278158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1688537216492!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end contact section -->
+
+
+  <!-- info section -->
+
+  <section class="info_section layout_padding2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="info_contact">
+            <h4>
+              Address
+            </h4>
+            <div class="contact_link_box">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  Location
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  Call +01 1234567890
+                </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  note@gmail.com
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="info_social">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="info_detail">
+            <h4>
+              Info
+            </h4>
+            <p>
+              necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h4>
+            Subscribe
+          </h4>
+          
+          <form action="#">
+            <input type="text" placeholder="Enter email" />
+            <button type="submit">
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info section -->
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <p>
+            &copy; <span id="displayYear"></span> All Rights Reserved. 
+           
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- footer section -->
+
+  <script src="/static/contact/js/jquery-3.4.1.min.js"></script>
+  <script src="/static/contact/js/bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="/static/contact/js/custom.js"></script>
+ 
+ 
+
+</body>
+
+</html>

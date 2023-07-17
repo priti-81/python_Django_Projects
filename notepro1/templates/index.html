@@ -1,3 +1,5 @@
+{% load account %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,51 +17,13 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/Notepad.ico.ico" />
 
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+
+
     <script src="/static/js/body.js" ></script>
 
     
    
-    <style>
-        .navbar-nav :hover{
-             transform: scale(1.15);
-            background-color: rgba(97, 96, 96, 0.3);
-            
-        }
-     .form-group{
-    position: relative;
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-.test{
-    font-weight: 550;
-}
-.back-ground{
-    background-color: #D3D3D3;
-}
-
-.carousel-inner > .carousel-item > img {
-  height: 500px;
-  width: 250px;
-}
-.navbar-brand{
-    font-family:cursive ;
-    font-size:28px;
-    font-weight: bold;
-    
-}
-.modal-body h6{
-  font-style: italic;
-}
-.demo{
-  background-color: rgba(38, 36, 36, 0.5);
-  color: whitesmoke
-}
-
-
-    </style>
-
-
 </head>
 <body>
   
@@ -73,11 +37,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav lead test">
-        {% block href %} <a href="" class="nav-item nav-link active mx-3">Home</a> {% endblock href %}
-        {% block href1 %} <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Notes</a> {% endblock href1 %}
-        {% block href2 %}  <a href="/aboutus" class="nav-item nav-link active mx-3">About Us</a> {% endblock href2 %}
-        {% block href3 %}  <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Profile</a> {% endblock href3 %}
-        {% block href4 %}   <a href="/contactus" class="nav-item nav-link active mx-3">Contact Us</a> {% endblock href4 %}
+      
+
+       <a href="/" class="nav-item nav-link active mx-3">Home</a> 
+      {% if request.user.is_authenticated or  username is not none %}
+        <a href= "/profile"  role="button" class="nav-item nav-link active mx-3">Profile</a> 
+        <a href="/notes"   role="button" class="nav-item nav-link active mx-3" >Notes</a> 
+      
+      {% else %}  
+      
+        <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Profile</a>
+        <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Notes</a> 
+          
+      {% endif %}
+      <a href="/aboutus" class="nav-item nav-link active mx-3">About Us</a>
+       <a href="/contactus" class="nav-item nav-link active mx-3">Contact Us</a>
+
+    
                 </div>
             </div>
         
@@ -86,10 +62,20 @@
             <form class="form-inline" >
              
                 <input type="search" placeholder="Search" class="form-control  border border-primary">
-            </form>
-{% block a1 %}   <a href="#modalCenter" data-bs-target="#signupModal" role="button" class="btn btn-success mx-2" data-bs-toggle="modal">Sign Up</a>{% endblock a1 %}
-{% block a2 %}   <a href="#modalCenter" data-bs-target="#loginModal" role="button" class="btn btn-dark me-2"  data-bs-toggle="modal">Login</a>{% endblock a2 %}
-
+            
+              </form>
+          {% if request.user.is_authenticated %}
+            <h4><span class="badge text-bg-success mx-2">Welcome, {{ request.user }}</span></h4>
+              
+          {% elif username %}
+            <h4><span class="badge text-bg-success mx-2">Welcome, {{ username }}</span></h4>
+          
+            
+          {% else %}
+                <a href="#modalCenter" data-bs-target="#signupModal" role="button" class="btn btn-success mx-2" data-bs-toggle="modal">Sign Up</a>
+                <a href="#modalCenter" data-bs-target="#loginModal" role="button" class="btn btn-dark me-2"  data-bs-toggle="modal">Login</a>
+            
+          {% endif %}
                 <!-- Modal HTML -->
                 <div id="signupModal" class="modal fade" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
@@ -144,8 +130,22 @@
     </div> <!-- form-group// -->
                                
     <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block"  name='signup'value="signup"> Create Account  </button>
-    </div> <!-- form-group// -->    
+        <button type="submit" class="btn btn-success btn-block"  name='signup'value="signup"> Create Account  </button>
+    </div> <!-- form-group// -->   
+    <hr> 
+   
+    <p class="text-center"> or </p>
+    <div class="d-grid gap-3 col-8 mx-auto sign-btn">
+      <a class="btn btn-outline-danger"  href="{% provider_login_url 'google'  process= 'connect' %}">
+        <i class="fab fa-google fa-2x mb-3" ></i>
+         Continue with Google </a>
+      <a class="btn btn-outline-dark " href="{% provider_login_url 'github' %}">
+        <i class="fab fa-github fa-2x"></i> 
+        Signin with github </a> 
+      <a class="btn btn-outline-primary" href="{% provider_login_url 'linkedin_oauth2'  process= 'connect'%}">
+        <i class="fab fa-linkedin fa-2x "></i> 
+        Signin with linkedin </a>
+    </div> 
     <p class="text-center">Have an account? please login </p>
 </div>
 </form>

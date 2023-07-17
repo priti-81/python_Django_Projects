@@ -1,12 +1,206 @@
-{% extends 'index.html' %}    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aboutus</title>
 
-{% block title %} aboutus {% endblock title %}
-        
-{% block href %}   <a href="/" class="nav-item nav-link active mx-3">Home</a> {% endblock href %}
-{% block href1 %}  <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Notes</a>  {% endblock href1 %}
-{% block href2 %}  <a href="" class="nav-item nav-link active mx-3">About Us</a> {% endblock href2 %}
-{% block href3 %}  <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Profile</a> {% endblock href3 %}
-{% block href4 %}  <a href="/contactus" class="nav-item nav-link active mx-3">Contact Us</a> {% endblock href4 %}
+         <!-- Vendor CSS Files -->
+  <link href="/static/about/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/static/about/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/about/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/about/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/static/about/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/static/about/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/static/css/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <!-- <link href="/static/about/assets/css/style.css" rel="stylesheet">
+   -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/Notepad.ico.ico" />
+
+    <script src="/static/js/body.js" ></script>
+
+<style>
+.navbar-nav :hover{
+    transform: scale(1.15);
+    background-color: rgba(97, 96, 96, 0.3);
+    
+}
+
+.test{
+    font-weight: 550;
+}
+.back-ground{
+    background-color: #D3D3D3;
+}
+
+.navbar-brand{
+    font-family:cursive ;
+    font-size:28px;
+    font-weight: bold;
+    
+}
+
+.demo{
+  background-color: rgba(38, 36, 36, 0.5);
+  color: whitesmoke
+}
+
+
+    </style>
+
+
+</head>
+<body>
+  
+    <nav class="navbar navbar-expand-lg navbar back-ground">
+        <div class="container-fluid">
+            <a  class="navbar-brand">
+                <img src="/static/images/notebook.png" style="width: 40px;" alt="CoolBrand"  >Mynote
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav lead test">   
+            <a href="/" class="nav-item nav-link active mx-3">Home</a> 
+            {% if request.user.is_authenticated or  username is not none %}
+                <a href= ""  role="button" class="nav-item nav-link active mx-3">Profile</a> 
+                <a href="/notes"   role="button" class="nav-item nav-link active mx-3" >Notes</a> 
+            
+            {% else %}  
+            
+                <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Profile</a>
+                <a href="#myModal"   role="button"  data-bs-toggle="modal"class="nav-item nav-link active mx-3" onclick="message()">Notes</a> 
                 
-{% block a1 %}   {% endblock a1 %}
-{% block a2 %}   {% endblock a2 %}
+            {% endif %}
+            <a href="" class="nav-item nav-link active mx-3">About Us</a>
+            <a href="/contactus" class="nav-item nav-link active mx-3">Contact Us</a>
+      
+           
+    
+    
+        </div> 
+    </div>
+    <form class="form-inline ms-auto" >    
+      <input type="search" placeholder="Search" class="form-control  border border-primary">
+    </form>
+    
+    </nav>
+    
+
+<div class="container-fluid">
+<section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+<div class="container" data-aos="fade-in">
+    <h1>Welcome to Flexor</h1>
+    <h2>We are team of talented designers making websites with Bootstrap</h2>
+    
+</div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+<!-- ======= Why Us Section ======= -->
+
+<section id="why-us" class="why-us">
+    <div class="container">
+
+    <div class="row">
+        <div class="col-xl-4 col-lg-5" data-aos="fade-up">
+        <div class="content">
+            <h3>Why Choose Flexor for your company website?</h3>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+            </p>
+            
+        </div>
+        </div>
+        <div class="col-xl-8 col-lg-7 d-flex">
+        <div class="icon-boxes d-flex flex-column justify-content-center">
+            <div class="row">
+            <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+                <div class="icon-box mt-4 mt-xl-0">
+                <i class="bx bx-receipt"></i>
+                <h4>Corporis voluptates sit</h4>
+                <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                </div>
+            </div>
+            <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-box mt-4 mt-xl-0">
+                <i class="bx bx-cube-alt"></i>
+                <h4>Ullamco laboris ladore pan</h4>
+                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                </div>
+            </div>
+            <div class="col-xl-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-box mt-4 mt-xl-0">
+                <i class="bx bx-images"></i>
+                <h4>Labore consequatur</h4>
+                <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    </div>
+</section><!-- End Why Us Section -->
+
+<!-- ======= About Section ======= -->
+<section id="about" class="about section-bg">
+    <div class="container">
+
+    <div class="row">
+        <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative" data-aos="fade-right">
+        <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox play-btn mb-4"></a>
+        </div>
+
+        <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+        <h4 data-aos="fade-up">About us</h4>
+        <h3 data-aos="fade-up">Enim quis est voluptatibus aliquid consequatur fugiat</h3>
+        <p data-aos="fade-up">Esse voluptas cumque vel exercitationem. Reiciendis est hic accusamus. Non ipsam et sed minima temporibus laudantium. Soluta voluptate sed facere corporis dolores excepturi. Libero laboriosam sint et id nulla tenetur. Suscipit aut voluptate.</p>
+
+        <div class="icon-box" data-aos="fade-up">
+            <div class="icon"><i class="bx bx-fingerprint"></i></div>
+            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+        </div>
+
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon"><i class="bx bx-gift"></i></div>
+            <h4 class="title"><a href="">Nemo Enim</a></h4>
+            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+        </div>
+
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon"><i class="bx bx-atom"></i></div>
+            <h4 class="title"><a href="">Dine Pad</a></h4>
+            <p class="description">Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
+        </div>
+
+        </div>
+    </div>
+
+    </div>
+</section><!-- End About Section -->
+ <!-- Vendor JS Files -->
+ <script src="/static/about/assets/vendor/aos/aos.js"></script>
+ <script src="/static/about/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <script src="/static/about/assets/vendor/glightbox/js/glightbox.min.js"></script>
+ <script src="/static/about/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+ <script src="/static/about/assets/vendor/swiper/swiper-bundle.min.js"></script>
+ <script src="/static/about/assets/vendor/php-email-form/validate.js"></script>
+
+ <!-- Template Main JS File -->
+ <script src="/static/about/assets/js/main.js"></script>
+ </div>
+</body>
+</html>
