@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>{% block title %} EHOUSING - Home {% endblock title %}</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link rel="website icon" type="png" href="/static/images/home.png">
+ 
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+ 
+  <!-- Template Main CSS File -->
+  <link href="/static/assets/css/style.css" rel="stylesheet">
+  <link href="/static/ehome.css" rel="stylesheet" >
+  
+
+  <!-- =======================================================
+  * Template Name: EstateAgency
+  * Updated: Jul 27 2023 with Bootstrap v5.3.1
+  * Template URL: https://bootstrapmade.com/real-estate-agency-bootstrap-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<!-- ======= Header/Navbar ======= -->
+<body>
+  <div>
+<nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+    <div class="container">
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="navbar-brand text-brand" href="/">Home<span class="color-b">Online</span></a>
+
+      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+        <ul class="navbar-nav">
+
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="/about">About</a>
+          </li>
+
+
+
+          <li class="nav-item">
+            <a class="nav-link " href="/bloggrid">Blog</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dashboard</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item " href="/buy">Buy</a>
+              <a class="dropdown-item " href="/rent">Rent</a>
+              <a class="dropdown-item " href="/sell">Sell</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/contact">Contact</a>
+          </li>
+        </ul>
+</div>
+{% if request.user.is_authenticated %}
+  
+    <div class="nav-item dropdown pe-5">
+     <h4><a class="nav dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">hi, {{request.user}}</a></h4>
+      <div class="dropdown-menu">
+        <a class="dropdown-item " href="/update">Update Profile</a>
+        <a class="dropdown-item " href="">Change Password</a>
+        <a class="dropdown-item " href="/logout">Logout</a>
+      </div>  
+  </div>
+{% else %}
+  <div class="pe-5">
+    <a type="button"  class="btn btn-outline-success" href="{% url 'signup' %}">SignUp</a>
+    <a type="button" class="btn btn-dark" href="{% url 'login' %}">Login</a>
+  </div>
+{% endif%}
+
+<button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
+  <i class="bi bi-search"></i>
+</button>
+    </div>
+</nav><!-- End Header/Navbar -->
+</div>
+<div>
+  {% block content %}
+  {% endblock %}
+</div>
+</body>
+</html>

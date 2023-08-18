@@ -5,6 +5,20 @@
 
 .full-screen-back {
     background-color: #eee;
-    height: 100vh; /* Set height to 100% of viewport height */
-    
 }
+
+form{
+    max-width: 700px;
+}
+
+.pass{
+    margin-top: 150px;
+}
+.custom-margin-top{
+    margin-top: 180px;
+   
+}
+
+
+
+
