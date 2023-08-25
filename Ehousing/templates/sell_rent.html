@@ -1,0 +1,68 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block title %}Sell & Rent {% endblock title %}
+
+{% block content %}
+
+<div class="container pass">
+    <div class="row">
+        <div class="col-sm-2">
+            <img src="{% static 'images/cartoon.gif' %}" alt="Animated Cartoon GIF" height="200" width="350" style="margin-right:200px;">
+      </div>
+        <div class="col-sm-7 offset-sm-2">
+            <h3>Welcome, Sell/Rent your House</h3>
+            <hr>
+            <form action="" method="post" novalidate class="shadow p-5 " enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for fm in form %}
+                    <div class="form-group">
+                        {{ fm.label_tag }}  {{ fm }} <small class="text-danger">{{ fm.errors|striptags }}</small><br>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary mt-4" name='salerinfo'value="salerinfo">Submit</button>
+
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="alert alert-danger my-3">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </form>
+            {% if messages %}
+                {% for message in messages %}
+                    <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+       
+    
+        
+         </div>
+        
+         <div class="col-sm-2">
+            
+            <img src="{% static 'images/gif.gif' %}" alt="Animated Cartoon GIF" height="200" width="350" style="margin-right:200px;">
+      </div>
+     
+      <div class="col-sm-7 offset-sm-2"><br>
+        <h3>Add House Amenities/Videos</h3>
+       <hr>
+        <form action="" method="post" novalidate class="shadow p-5 " enctype='multipart/form-data'>
+            {% csrf_token %}
+            {% for fm in form_A %}
+                <div class="form-group ">
+                    {{ fm.label_tag|safe }} {{ fm|safe }} <small class="text-danger">{{ fm.errors|striptags }}</small><br>
+                </div>
+            {% endfor %}
+           
+            <button type="submit" class="btn btn-primary mt-4" name="info" value="info">Submit</button>
+
+            {% if form_A.non_field_errors %}
+                {% for error in form_A.non_field_errors %}
+                    <p class="alert alert-danger my-3">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </form>
+    </div>   
+    </div>
+</div>
+
+{% endblock %}

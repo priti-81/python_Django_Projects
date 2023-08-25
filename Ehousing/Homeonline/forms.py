@@ -1,8 +1,11 @@
-from .models import CustomUser
+from .models import CustomUser,Amenities,SalerInfo
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm,PasswordResetForm,SetPasswordForm
 from django import forms
 from django.utils.translation import gettext,gettext_lazy as _
+
+
 from django.contrib.auth import password_validation
+from django.forms import ModelMultipleChoiceField
 
 class SignupForm(UserCreationForm):
     contactno = forms.IntegerField(min_value=0,error_messages={'required' :'Please enter your contact number'},widget=forms.NumberInput(attrs={'class':'form-control'}))
@@ -19,6 +22,11 @@ class SignupForm(UserCreationForm):
         fields = ['username','contactno','email','password1','password2']
         labels = {'email': 'Email','contactno':'ContactNO'}
 
+    def clean_contactno(self):
+        contactno = self.cleaned_data.get('contactno')
+        if len(str(contactno))>10:
+            raise forms.ValidationError("Enter 10 digit ContactNo.")
+        return contactno
 
 
 class LoginForm(AuthenticationForm):
@@ -47,4 +55,42 @@ class CustomerProfileForm(forms.ModelForm):
         model=CustomUser
         fields=['username','email','contactno']
         labels = {'email': 'Email','contactno':'ContactNO'}
-        widgets={'username':forms.TextInput(attrs={'class':'form-control'}),'email':forms.EmailInput(attrs={'class':'form-control'}),'contactno':forms.NumberInput(attrs={'class':'form-control'})}
+        widgets={'username':forms.TextInput(attrs={'class':'form-control'}),'email':forms.EmailInput(attrs={'class':'form-control'}),'contactno':forms.NumberInput(attrs={'class':'form-control'} )}
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not email:
+            raise forms.ValidationError("This field is required.")
+        return email
+    
+
+class SalerInfoForm(forms.ModelForm):
+    class Meta:
+        model=SalerInfo
+        fields=['HouseOwnerName','Area','Contactno','BHK','Status','Upload_Image','House_Description','House_address','House_price']
+        labels={'HouseOwnerName':'House Owner Name','Upload_Image':'Upload Image','House_Description':'House Description','House_address':'House Address','House_price':'House Price'}
+        widgets={'HouseOwnerName':forms.TextInput(attrs={'class':'form-control'}),
+        'Area':forms.NumberInput(attrs={'class':'form-control'}),
+        'Contactno':forms.NumberInput(attrs={'class':'form-control'}),
+        'BHK':forms.NumberInput(attrs={'class':'form-control'}),
+        'Status':forms.Select(attrs={'class':'form-control'},choices=SalerInfo.status),
+        'Upload_Image':forms.ClearableFileInput(attrs={'class':'form-control',}),
+        'House_Description':forms.Textarea(attrs={'class':'form-control','rows': 5, 'cols': 5}),
+        'House_address':forms.Textarea(attrs={'class':'form-control','rows': 5, 'cols': 5}),
+        'House_price':forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+    
+class AmenitiesForm(forms.ModelForm):
+    Add_Amenities = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple,
+        choices=Amenities.Amenities_Choices
+    )
+
+    class Meta:
+        model=Amenities
+        fields=['Add_Amenities','video_file']
+        labels={'Add_Amenities':'Select Amenities','video_file':'Upload Video'}
+        widgets={
+        'video_file':forms.FileInput(attrs={'class':'form-control'})}
+

@@ -1,5 +1,7 @@
 from django.urls import path
 from Homeonline import views
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from .forms import LoginForm,MyPasswordChangeForm,MyPasswordResetForm,MySetPasswordForm
 
@@ -7,9 +9,8 @@ urlpatterns = [
    path('',views.index,name='index'),
    path('about/',views.about),
    path('bloggrid/',views.bloggrid),
-   path('buy/',views.buy),
-   path('rent/',views.rent),
-   path('sell/',views.sell),
+   path('buy/',views.buy,name='buy'),
+   path('sell_rent/',views.sell_rent, name='sell_rent'),
    path('update/',views.updatedata,name='updateprofile'),
    path('contact/',views.contact),
    path('signup/',views.signupview.as_view(),name='signup'),
@@ -22,4 +23,4 @@ urlpatterns = [
    path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html',form_class=MySetPasswordForm),name='password_reset_confirm'),
    path('password-reset-complete/',auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),name='password_reset_complete'),
   
-]
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

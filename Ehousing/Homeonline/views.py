@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views import View
-from .forms import SignupForm,CustomerProfileForm
+from .forms import SignupForm,CustomerProfileForm,SalerInfoForm,AmenitiesForm
 from .models import CustomUser
 from django.contrib import messages
 
@@ -38,10 +38,34 @@ def bloggrid(request):
     return render(request,'blog-grid.html')
 
 def buy(request):
+   
     return render(request,'buy.html')
 
-def sell(request):
-    return render(request,'sell.html')
+
+
+def sell_rent(request):
+    form = SalerInfoForm()
+    form_A = AmenitiesForm()
+    if request.method == 'POST':
+        print(request.POST)
+        if request.POST.get('salerinfo') == 'salerinfo': 
+            form = SalerInfoForm(request.POST,request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('sell_rent')     
+        if request.POST.get('info') == 'info': 
+            print('yes')
+            form_A = AmenitiesForm(request.POST,request.FILES)
+            if form_A.is_valid():
+                print(form_A.cleaned_data)
+                form_A.save()  
+                return redirect('sell_rent')
+            else:
+               print(form_A.errors)
+
+    return render(request, 'sell_rent.html', {'form': form, 'form_A': form_A})
+
+
 
 def updatedata(request):
     update=CustomUser.objects.get(id=request.user.id)
@@ -49,12 +73,10 @@ def updatedata(request):
         form=CustomerProfileForm(request.POST,instance=update)
         if form.is_valid():
             form.save()
-            messages.success(request,'Congratulations!! Profile Updated Successfully')
-            return redirect('login')
+            messages.success(request,'Congratulations!! Profile Updated Successfully, Please,Login again')
+            return redirect('updateprofile')
         return render(request,'update.html',{'form':form})
     else:
-        form=CustomerProfileForm()
+        form=CustomerProfileForm(instance=update)
         return render(request,'update.html',{'form':form})
 
-def rent(request):
-    return render(request,'rent.html')

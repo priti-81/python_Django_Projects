@@ -3,8 +3,9 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+ 
 
   <title>{% block title %} EHOUSING - Home {% endblock title %}</title>
   <meta content="" name="description">
@@ -22,10 +23,15 @@
   <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="/static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/static/ehome.css" rel="stylesheet">
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/static/ehome.js"></script> -->
  
   <!-- Template Main CSS File -->
   <link href="/static/assets/css/style.css" rel="stylesheet">
-  <link href="/static/ehome.css" rel="stylesheet" >
+  
+
+  
   
 
   <!-- =======================================================
@@ -69,8 +75,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dashboard</a>
             <div class="dropdown-menu">
               <a class="dropdown-item " href="/buy">Buy</a>
-              <a class="dropdown-item " href="/rent">Rent</a>
-              <a class="dropdown-item " href="/sell">Sell</a>
+              <a class="dropdown-item " href="/sell_rent">Sell & Rent</a>
             </div>
           </li>
           <li class="nav-item">
@@ -106,4 +111,5 @@
   {% endblock %}
 </div>
 </body>
+
 </html>

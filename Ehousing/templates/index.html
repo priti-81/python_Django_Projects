@@ -163,8 +163,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dashboard</a>
             <div class="dropdown-menu">
               <a class="dropdown-item " href="/buy">Buy</a>
-              <a class="dropdown-item " href="/rent">Rent</a>
-              <a class="dropdown-item " href="/sell">Sell</a>
+              <a class="dropdown-item " href="/sell_rent">Sell & Rent</a>
             </div>
           </li>
           <li class="nav-item">
@@ -333,16 +332,8 @@
                           </span>
                         </li>
                         <li>
-                          <h4 class="card-info-title">Beds</h4>
+                          <h4 class="card-info-title">BHK</h4>
                           <span>2</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
                         </li>
                       </ul>
                     </div>
@@ -464,7 +455,7 @@
                       <div class="price-box d-flex">
                         <span class="price-a">rent | $ 12.000</span>
                       </div>
-                      <a href="property-single.html" class="link-a">Click here to view
+                      <a href="{% url  'buy' %}"class="link-a">Click here to view
                         <span class="bi bi-chevron-right"></span>
                       </a>
                     </div>
@@ -509,11 +500,6 @@
             <div class="title-wrap d-flex justify-content-between">
               <div class="title-box">
                 <h2 class="title-a">Latest News</h2>
-              </div>
-              <div class="title-link">
-                <a href="blog-grid.html">All News
-                  <span class="bi bi-chevron-right"></span>
-                </a>
               </div>
             </div>
           </div>
@@ -626,7 +612,7 @@
     </section><!-- End Latest News Section -->
 
    <!-- ======= Footer ======= -->
-  <section class="section-footer">
+<section class="section-footer">
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-4">
