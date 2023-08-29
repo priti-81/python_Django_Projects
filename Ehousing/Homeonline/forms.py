@@ -1,11 +1,9 @@
-from .models import CustomUser,Amenities,SalerInfo
+from .models import CustomUser,SalerInfo
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField,PasswordChangeForm,PasswordResetForm,SetPasswordForm
 from django import forms
 from django.utils.translation import gettext,gettext_lazy as _
-
-
 from django.contrib.auth import password_validation
-from django.forms import ModelMultipleChoiceField
+
 
 class SignupForm(UserCreationForm):
     contactno = forms.IntegerField(min_value=0,error_messages={'required' :'Please enter your contact number'},widget=forms.NumberInput(attrs={'class':'form-control'}))
@@ -67,8 +65,8 @@ class CustomerProfileForm(forms.ModelForm):
 class SalerInfoForm(forms.ModelForm):
     class Meta:
         model=SalerInfo
-        fields=['HouseOwnerName','Area','Contactno','BHK','Status','Upload_Image','House_Description','House_address','House_price']
-        labels={'HouseOwnerName':'House Owner Name','Upload_Image':'Upload Image','House_Description':'House Description','House_address':'House Address','House_price':'House Price'}
+        fields=['HouseOwnerName','Area','Contactno','BHK','Status','Upload_Image','House_Description','House_address','House_price','video_file']
+        labels={'HouseOwnerName':'House Owner Name','Upload_Image':'Upload Image','House_Description':'House Description','House_address':'House Address','House_price':'House Price','video_file':'Upload video'}
         widgets={'HouseOwnerName':forms.TextInput(attrs={'class':'form-control'}),
         'Area':forms.NumberInput(attrs={'class':'form-control'}),
         'Contactno':forms.NumberInput(attrs={'class':'form-control'}),
@@ -78,19 +76,16 @@ class SalerInfoForm(forms.ModelForm):
         'House_Description':forms.Textarea(attrs={'class':'form-control','rows': 5, 'cols': 5}),
         'House_address':forms.Textarea(attrs={'class':'form-control','rows': 5, 'cols': 5}),
         'House_price':forms.TextInput(attrs={'class':'form-control'}),
+        'video_file':forms.FileInput(attrs={'class': 'form-control'})
         }
 
-    
-class AmenitiesForm(forms.ModelForm):
-    Add_Amenities = forms.MultipleChoiceField(
-        widget=forms.CheckboxSelectMultiple,
-        choices=Amenities.Amenities_Choices
-    )
 
-    class Meta:
-        model=Amenities
-        fields=['Add_Amenities','video_file']
-        labels={'Add_Amenities':'Select Amenities','video_file':'Upload Video'}
-        widgets={
-        'video_file':forms.FileInput(attrs={'class':'form-control'})}
+
+from django import forms
+from .models import SalerInfo, UserSelection
+
+class MyForm(forms.Form):
+    Saler_InfoId = forms.ModelChoiceField(queryset=SalerInfo.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-select'}))
+    select_amenities = forms.ModelMultipleChoiceField(queryset=UserSelection.objects.all(), widget=forms.CheckboxSelectMultiple)
+
 

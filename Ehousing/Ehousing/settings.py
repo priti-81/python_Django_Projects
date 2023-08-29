@@ -149,3 +149,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # add field in User built in model
 AUTH_USER_MODEL = 'Homeonline.CustomUser'
+
