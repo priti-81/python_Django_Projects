@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views import View
-from .forms import SignupForm,CustomerProfileForm,SalerInfoForm,MyForm
-from .models import CustomUser,UserSelection,SelectedAmenities
+from .forms import SignupForm,CustomerProfileForm,SalerInfoForm
+from .models import CustomUser,UserSelection,SalerInfo
 from django.contrib import messages
 
 # Create your views here.
@@ -97,28 +97,15 @@ def updatedata(request):
 
 def sell_rent(request):
     form = SalerInfoForm()
-    form_A=MyForm()
+  
 
     if request.method == 'POST':
         if request.POST.get('salerinfo') == 'salerinfo': 
             form = SalerInfoForm(request.POST,request.FILES)
             if form.is_valid():
-                form.save()
+                saler_info = form.save(commit=False)  # Create an instance but don't save yet
+                saler_info.save()  # Save the instance to the database
+                form.save_m2m()  # Save the many-to-many relationships (selected amenities)
                 return redirect('sell_rent') 
-                
-        if 'info' in request.POST: 
-            form_A = MyForm(request.POST)
-            if form_A.is_valid() :
-                saler_info = form_A.cleaned_data['Saler_InfoId']
-                print(saler_info)
-                selected_amenities = form_A.cleaned_data['select_amenities']
-                print(selected_amenities)
-
-            for amenity in selected_amenities:
-                SelectedAmenities.objects.create(saler_info=saler_info, amenity=amenity)
-
-          
-
-            return redirect('sell_rent')
-    return render(request, 'sell_rent.html', {'form': form,'form_A':form_A,})
+    return render(request, 'sell_rent.html', {'form': form})
 

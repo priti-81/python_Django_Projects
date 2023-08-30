@@ -30,20 +30,12 @@ class SalerInfo(models.Model):
     House_price=models.CharField(max_length=50)
     video_file = models.FileField(upload_to='videos', blank=True, default=None)
     amenities = models.ManyToManyField(UserSelection)
-
+    
     def __str__(self):
         return self.HouseOwnerName
 
 
 
-class SelectedAmenities(models.Model):
-    saler_info = models.ForeignKey(SalerInfo, on_delete=models.CASCADE)
-    amenity = models.ForeignKey(UserSelection, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.saler_info} - {self.amenity}"
-    
-   
 
 
 
