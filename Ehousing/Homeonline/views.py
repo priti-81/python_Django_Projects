@@ -6,7 +6,8 @@ from django.contrib import messages
 
 # Create your views here.
 def index(request):
-    return render(request,'index.html')
+    saler_infodata=SalerInfo.objects.all()
+    return render(request,'index.html',{'salerdata':saler_infodata})
 
 
 class signupview(View):
@@ -25,8 +26,8 @@ class signupview(View):
 
 
 
-def login(request):
-    return render(request,'login.html')
+# def login(request):
+#     return render(request,'login.html')
 
 def about(request):
     return render(request,'about.html')
@@ -37,9 +38,10 @@ def contact(request):
 def bloggrid(request):
     return render(request,'blog-grid.html')
 
-def buy(request):
-   
-    return render(request,'buy.html')
+def buy(request,id):
+    seller_data=SalerInfo.objects.get(id=id)
+    selected_amenities=seller_data.amenities.all()
+    return render(request,'buy.html',{'sellerdata':seller_data,'selectedamenities':selected_amenities})
 
 
 
@@ -97,15 +99,16 @@ def updatedata(request):
 
 def sell_rent(request):
     form = SalerInfoForm()
-  
 
     if request.method == 'POST':
         if request.POST.get('salerinfo') == 'salerinfo': 
             form = SalerInfoForm(request.POST,request.FILES)
             if form.is_valid():
-                saler_info = form.save(commit=False)  # Create an instance but don't save yet
+                saler_info = form.save(commit=False)
+                print(saler_info)  # Create an instance but don't save yet
                 saler_info.save()  # Save the instance to the database
                 form.save_m2m()  # Save the many-to-many relationships (selected amenities)
+                messages.success(request,'Congratulations!! Your form submited Successfully')
                 return redirect('sell_rent') 
     return render(request, 'sell_rent.html', {'form': form})
 

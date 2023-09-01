@@ -9,7 +9,7 @@ urlpatterns = [
    path('',views.index,name='index'),
    path('about/',views.about),
    path('bloggrid/',views.bloggrid),
-   path('buy/',views.buy,name='buy'),
+   path('buy/<int:id>',views.buy,name='buy'),
    path('sell_rent/',views.sell_rent, name='sell_rent'),
    path('update/',views.updatedata,name='updateprofile'),
    path('contact/',views.contact),

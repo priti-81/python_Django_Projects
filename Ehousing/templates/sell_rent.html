@@ -9,7 +9,13 @@
         <div class="col-sm-2">
             <img src="{% static 'images/cartoon.gif' %}" alt="Animated Cartoon GIF" height="200" width="350" style="margin-right:200px;">
       </div>
+        
         <div class="col-sm-7 offset-sm-2">
+            {% if messages %}
+                {% for message in messages %}
+                    <p {% if message.tags %} class="alert alert-{{message.tags}} " {% endif %}>{{message}}</p>
+                {% endfor %}
+            {% endif %}
             <h3>Welcome, Sell/Rent your House</h3>
             <hr>
             <form action="" method="post" novalidate class="shadow p-5 " enctype="multipart/form-data">
@@ -27,12 +33,7 @@
                     {% endfor %}
                 {% endif %}
             </form>
-            {% if messages %}
-                {% for message in messages %}
-                    <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
-                {% endfor %}
-            {% endif %}
-        
+            
         </div>   
     </div>
 </div>

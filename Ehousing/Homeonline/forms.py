@@ -70,7 +70,7 @@ class SalerInfoForm(forms.ModelForm):
     class Meta:
         model=SalerInfo
         fields=['HouseOwnerName','Area','Contactno','BHK','Status','Upload_Image','House_Description','House_address','House_price','video_file','amenities']
-        labels={'HouseOwnerName':'House Owner Name','Upload_Image':'Upload Image','House_Description':'House Description','House_address':'House Address','House_price':'House Price','video_file':'Upload video','amenities':'Select_amenities'}
+        labels={'HouseOwnerName':'House Owner Name','Upload_Image':'Upload Image','House_Description':'House Description','House_address':'House Address','House_price':'House Price','video_file':'Upload video(optional)','amenities':'Select_amenities'}
         widgets={'HouseOwnerName':forms.TextInput(attrs={'class':'form-control'}),
         'Area':forms.NumberInput(attrs={'class':'form-control'}),
         'Contactno':forms.NumberInput(attrs={'class':'form-control'}),

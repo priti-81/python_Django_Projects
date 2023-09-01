@@ -42,3 +42,4 @@ class SalerInfo(models.Model):
 
 
 
+
