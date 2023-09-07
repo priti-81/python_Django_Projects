@@ -6,3 +6,6 @@ class Bookinfo(models.Model):
     Author=models.CharField(max_length=30)
     Isbn=models.IntegerField()
     Publisher=models.CharField(max_length=40)
+
+    class Meta:
+        ordering=['-id']
