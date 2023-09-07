@@ -1,8 +1,11 @@
 from django.shortcuts import render,redirect
 from django.views import View
-from .forms import SignupForm,CustomerProfileForm,SalerInfoForm
+from .forms import SignupForm,CustomerProfileForm,SalerInfoForm,ContactForm
 from .models import CustomUser,UserSelection,SalerInfo
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 # Create your views here.
 def index(request):
@@ -23,62 +26,46 @@ class signupview(View):
         return render (request,'signup.html',{'form': form})
 
 
-
-
-
-# def login(request):
-#     return render(request,'login.html')
-
 def about(request):
     return render(request,'about.html')
 
+
 def contact(request):
-    return render(request,'contact.html')
+    if request.method=='POST':
+        form=ContactForm(request.POST)
+        if form.is_valid():
+            name=form.cleaned_data['name']
+            email=form.cleaned_data['email']
+            subject=form.cleaned_data['subject']
+            message=form.cleaned_data['message']
+           
+            html=render_to_string('contact/email.html',
+                                  {'name':name,
+                                  'email':email,
+                                  'subject':subject,
+                                  'message':message})
+    
+            send_mail('ContactForm','This is message','priti@gmail.com',['djangotest2023@gmail.com'],html_message=html)
+            messages.success(request,'Your Message has been sent successfully!! Thank u')
+            return redirect('contact')
+    else:
+        form=ContactForm()
+    return render(request,'contact.html',{'form':form})
+
 
 def bloggrid(request):
     return render(request,'blog-grid.html')
 
+def propertygrid(request):
+    saler_infodata=SalerInfo.objects.all()
+    return render(request,'property-grid.html',{'salerdata':saler_infodata})
+
+
+@login_required
 def buy(request,id):
     seller_data=SalerInfo.objects.get(id=id)
     selected_amenities=seller_data.amenities.all()
     return render(request,'buy.html',{'sellerdata':seller_data,'selectedamenities':selected_amenities})
-
-
-
-# def sell_rent(request):
-#     form = SalerInfoForm()
-#     form_A=AmenitiesForm()
-#     if request.method == 'POST':
-#         if request.POST.get('salerinfo') == 'salerinfo': 
-#             form = SalerInfoForm(request.POST,request.FILES)
-#             if form.is_valid():
-#                 form.save()
-#                 contactdata=request.POST['Contactno']
-#                 saler_infoid=SalerInfo.objects.get(Contactno=contactdata)
-#                 print('ID:',saler_infoid.id)
-#                 if saler_infoid:
-#                     request.session['usercontact']=contactdata
-#                     request.session['userid']=saler_infoid.id
-#                 return redirect('sell_rent') 
-                
-#         if 'info' in request.POST: 
-#             form_A = AmenitiesForm(request.POST) 
-#             if form_A.is_valid() :
-#                 print(form_A.cleaned_data,'---------------------')
-
-#                 saler_info_id=request.session.get('userid') 
-#                 try:
-#                     saler_info= SalerInfo.objects.get(id=saler_info_id) 
-#                     user_amenities = form_A.save(commit=False)
-#                     user_amenities.Saler_InfoId = saler_info  # saler_info instance 
-#                     user_amenities.save()
-#                     form_A.save_m2m()  # Save when  many-to-many relationships created
-#                     request.session.clear()
-#                 except SalerInfo.DoesNotExist:
-#                     print('This Salerid does not exist')
-
-#                 return redirect('sell_rent')
-#     return render(request, 'sell_rent.html', {'form': form,'form_A':form_A})
 
 
 
@@ -96,7 +83,7 @@ def updatedata(request):
         return render(request,'update.html',{'form':form})
 
 
-
+@login_required
 def sell_rent(request):
     form = SalerInfoForm()
 

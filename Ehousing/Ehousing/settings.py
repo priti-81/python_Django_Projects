@@ -39,6 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Homeonline',
+
+    #django all-auth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -49,7 +55,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   
 ]
+
+
 
 ROOT_URLCONF = 'Ehousing.urls'
 
@@ -67,6 +76,13 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+# social authentication
+AUTHENTICATION_BACKENDS = [
+
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = 'Ehousing.wsgi.application'
@@ -136,16 +152,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL='/update/'
 
 
+
 # email configuration
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = "djangotest2023@gmail.com" #sender's emailid
-# EMAIL_HOST_PASSWORD = "iqyetprpiaqlmbfu"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "djangotest2023@gmail.com" #sender's emailid
+EMAIL_HOST_PASSWORD = "iqyetprpiaqlmbfu"
 
 # before deployment check email in terminal by below configuration
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # add field in User built in model
 AUTH_USER_MODEL = 'Homeonline.CustomUser'
