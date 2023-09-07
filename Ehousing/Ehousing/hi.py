@@ -1,2 +1,0 @@
-print(len('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'))
-print(len('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'))
